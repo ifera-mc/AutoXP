@@ -6,7 +6,7 @@
 |:--:|:--:|:--:|:--:|
 |[![HitCount](http://hits.dwyl.io/JackMD/AutoXP.svg)](http://hits.dwyl.io/JackMD/AutoXP)|[![GitHub license](https://img.shields.io/github/license/JackMD/AutoXP.svg)](https://github.com/JackMD/AutoXP/blob/master/LICENSE)|[![Poggit-CI](https://poggit.pmmp.io/ci.shield/JackMD/AutoXP/AutoXP)](https://poggit.pmmp.io/ci/JackMD/AutoXP/AutoXP)|[![](https://poggit.pmmp.io/shield.state/AutoXP)](https://poggit.pmmp.io/p/AutoXP)|
 
-### A AutoXP plugin for PocketMine-MP // McPe 1.2
+### A AutoXP plugin for PocketMine-MP
 ### Features:
  - AutoXP automatically transfers all the xp to your experience bar without dropping any.
  - Great way to reduce lag caused by Experience Orbs.
