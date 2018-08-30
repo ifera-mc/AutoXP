@@ -54,8 +54,16 @@ class Main extends PluginBase implements Listener{
 		$event->getPlayer()->addXp($event->getXpDropAmount());
 		$event->setXpDropAmount(0);
 	}
-	
+
+
+    /**
+     * @param PlayerDeathEvent $event
+     * @priority HIGHEST
+     */
 	public function onPlayerKill(PlayerDeathEvent $event){
+	    if($event->isCancelled()){
+	        return;
+        }
 		$player = $event->getPlayer();
 		$cause = $player->getLastDamageCause();
 		if($cause instanceof EntityDamageByEntityEvent){
