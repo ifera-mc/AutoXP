@@ -42,13 +42,28 @@ class Main extends PluginBase implements Listener{
 		$this->getServer()->getPluginManager()->registerEvents(($this), $this);
 		$this->getLogger()->info("Plugin Enabled.");
 	}
-	
+
+    /**
+     * @param BlockBreakEvent $event
+     * @priority HIGHEST
+     */
 	public function onBreak(BlockBreakEvent $event){
+	    if($event->isCancelled()){
+	        return;
+        }
 		$event->getPlayer()->addXp($event->getXpDropAmount());
 		$event->setXpDropAmount(0);
 	}
-	
+
+
+    /**
+     * @param PlayerDeathEvent $event
+     * @priority HIGHEST
+     */
 	public function onPlayerKill(PlayerDeathEvent $event){
+	    if($event->isCancelled()){
+	        return;
+        }
 		$player = $event->getPlayer();
 		$cause = $player->getLastDamageCause();
 		if($cause instanceof EntityDamageByEntityEvent){
