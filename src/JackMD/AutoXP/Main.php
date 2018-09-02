@@ -31,47 +31,41 @@ namespace JackMD\AutoXP;
 
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener{
-	
-	public function onEnable(): void{
-		$this->getServer()->getPluginManager()->registerEvents(($this), $this);
-		$this->getLogger()->info("Plugin Enabled.");
-	}
+
+    public function onEnable(): void{
+        $this->getServer()->getPluginManager()->registerEvents(($this), $this);
+        $this->getLogger()->info("Plugin enabled.");
+    }
 
     /**
      * @param BlockBreakEvent $event
      * @priority HIGHEST
      */
-	public function onBreak(BlockBreakEvent $event){
-	    if($event->isCancelled()){
-	        return;
-        }
-		$event->getPlayer()->addXp($event->getXpDropAmount());
-		$event->setXpDropAmount(0);
-	}
+    public function onBreak(BlockBreakEvent $event){
+        if($event->isCancelled()) return;
+        $event->getPlayer()->addXp($event->getXpDropAmount());
+        $event->setXpDropAmount(0);
+    }
 
 
     /**
-     * @param PlayerDeathEvent $event
+     * @param EntityDeathEvent $event
      * @priority HIGHEST
      */
-	public function onPlayerKill(PlayerDeathEvent $event){
-	    if($event->isCancelled()){
-	        return;
+    public function onEntityKill(EntityDeathEvent $event){
+        if($event->isCancelled()) return;
+        $player = $event->getEntity();
+        $cause = $player->getLastDamageCause();
+        if($cause instanceof EntityDamageByEntityEvent){
+            $damager = $cause->getDamager();
+            if($damager instanceof Player) $damager->addXp($player->getXpDropAmount());
+            if($player instanceof Player) $player->setCurrentTotalXp(0);
         }
-		$player = $event->getPlayer();
-		$cause = $player->getLastDamageCause();
-		if($cause instanceof EntityDamageByEntityEvent){
-			$damager = $cause->getDamager();
-			if($damager instanceof Player){
-				$damager->addXp($player->getXpDropAmount());
-				$player->setCurrentTotalXp(0);
-			}
-		}
-	}
+    }
 }
