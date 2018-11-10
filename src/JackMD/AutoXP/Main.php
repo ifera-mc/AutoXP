@@ -61,9 +61,6 @@ class Main extends PluginBase implements Listener {
 	 * @priority HIGHEST
 	 */
 	public function onPlayerKill(PlayerDeathEvent $event) {
-		if ($event->isCancelled()) {
-			return;
-		}
 		$player = $event->getPlayer();
 		$cause = $player->getLastDamageCause();
 		if ($cause instanceof EntityDamageByEntityEvent) {
