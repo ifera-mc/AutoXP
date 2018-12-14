@@ -1,7 +1,7 @@
 name: AutoXP
 main: JackMD\AutoXP\Main
 api: [3.0.0]
-version: 1.1.p
+version: 1.1.0
 author: JackMD
 load: POSTWORLD
 description: Say goodbye to xp orbs, now they come directly to your inventory.
